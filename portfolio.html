@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative by BeyondStars — Video Portfolio</title>
+<meta name="description" content="Explore vertical reels, square videos and widescreen films created by BeyondStars Studios.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0E1A30;
+    --navy:#152C52;
+    --navy-2:#1C3B6E;
+    --paper:#F3EEE1;
+    --paper-2:#E9E0C9;
+    --gold-light:#F5CE72;
+    --gold:#E3A93C;
+    --gold-deep:#A8721E;
+    --text:#1B2233;
+    --muted-dark:#5B5C6B;
+    --muted-light:#B7C0D6;
+    --line:rgba(14,26,48,0.12);
+    --line-dark:rgba(245,206,114,0.25);
+    --radius:2px;
+    --maxw:1120px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family:'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .display{
+    font-family:'Anton', 'Inter', sans-serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+
+  a{color:inherit;}
+  img,svg{display:block;max-width:100%;}
+
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 clamp(20px,5vw,48px);
+  }
+
+  /* Focus */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--gold);
+    outline-offset:3px;
+  }
+
+  /* NAV */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:var(--ink);
+    border-bottom:1px solid var(--line-dark);
+  }
+  .nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px clamp(20px,5vw,48px);
+    max-width:var(--maxw); margin:0 auto;
+  }
+  .brand{ display:flex; align-items:center; text-decoration:none; }
+  .brand-logo{ height:40px; width:auto; display:block; }
+  nav.links{ display:flex; align-items:center; gap:clamp(16px,3vw,34px); }
+  nav.links a{
+    color:var(--muted-light);
+    text-decoration:none;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+    position:relative;
+    padding:6px 0;
+    transition:color .2s ease;
+  }
+  nav.links a:hover, nav.links a.active{ color:var(--paper); }
+  nav.links a::after{
+    content:"";
+    position:absolute; left:0; right:100%; bottom:0;
+    height:2px; background:var(--gold);
+    transition:right .25s ease;
+  }
+  nav.links a:hover::after, nav.links a.active::after{ right:0; }
+  .nav-cta{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--gold);
+    color:var(--ink) !important;
+    font-weight:700 !important;
+    padding:9px 16px;
+    border-radius:1px;
+    text-transform:uppercase;
+    font-size:12px !important;
+    letter-spacing:0.06em;
+  }
+  .nav-cta::after{ display:none; }
+  .nav-cta:hover{ background:var(--gold-light); }
+  .nav-toggle{ display:none; }
+
+  /* PORTFOLIO STYLES */
+  .portfolio-page {
+    min-height: 100vh;
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .portfolio-intro {
+    padding: clamp(48px, 8vw, 88px) 0 clamp(32px, 5vw, 54px);
+    background: linear-gradient(180deg, var(--ink), var(--navy) 80%, var(--navy-2));
+    color: var(--paper);
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .kicker::before {
+    content: "";
+    width: 26px;
+    height: 2px;
+    background: var(--gold);
+  }
+  .portfolio-intro h1 {
+    margin: 16px 0 14px;
+    font-size: clamp(38px, 6vw, 70px);
+    line-height: 1.02;
+    color: var(--paper);
+  }
+  .portfolio-intro p {
+    max-width: 58ch;
+    margin: 0;
+    color: var(--muted-light);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .portfolio-section {
+    padding: clamp(48px, 7vw, 84px) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .portfolio-section-alt {
+    background: var(--paper-2);
+  }
+  .portfolio-section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+  .portfolio-section-heading h2 {
+    margin: 8px 0 0;
+    color: var(--ink);
+    font-size: clamp(32px, 4.5vw, 48px);
+    line-height: 1.05;
+  }
+  .portfolio-ratio {
+    flex: 0 0 auto;
+    padding: 7px 12px;
+    border: 1px solid var(--gold-deep);
+    color: var(--gold-deep);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 2px;
+  }
+
+  /* Portfolio Video Grids */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: clamp(28px, 4.5vw, 48px);
+  }
+  .portfolio-grid-vertical {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+  .portfolio-item {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    position: relative;
+  }
+  .portfolio-item video {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 76vh;
+    margin: 0 auto;
+    object-fit: cover;
+    background: var(--ink);
+    border: 1px solid rgba(14,26,48,0.2);
+    border-radius: 4px;
+    box-shadow: 0 12px 32px rgba(14,26,48,0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .portfolio-item:hover video {
+    box-shadow: 0 18px 44px rgba(14,26,48,0.22);
+    border-color: var(--gold);
+  }
+  .portfolio-grid-vertical .portfolio-item video {
+    aspect-ratio: 9 / 16;
+  }
+  .portfolio-grid-square .portfolio-item video {
+    aspect-ratio: 1 / 1;
+  }
+  .portfolio-grid-widescreen .portfolio-item video {
+    aspect-ratio: 16 / 9;
+  }
+  .portfolio-item-meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 14px;
+  }
+  .portfolio-item h3 {
+    margin: 0;
+    color: var(--ink);
+    font-family: 'Anton', sans-serif;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .new-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* Floating WhatsApp direct icon */
+  .whatsapp-float-btn {
+    position: fixed;
+    z-index: 88;
+    bottom: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .whatsapp-float-btn:hover {
+    transform: translateY(-2px);
+    background: #20BA59;
+  }
+  .whatsapp-float-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  /* FOOTER */
+  footer{
+    background:var(--ink);
+    color:var(--muted-light);
+    padding:32px 0;
+    border-top:1px solid var(--line-dark);
+  }
+  .foot-row{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;
+    font-size:12.5px;
+  }
+  .foot-row .brand-logo{ height:26px; }
+
+  /* RESPONSIVE */
+  @media (max-width:760px){
+    nav.links{
+      position:fixed; top:64px; right:0; bottom:0; z-index:40;
+      width:min(320px,86vw);
+      background:var(--ink);
+      flex-direction:column; align-items:flex-start;
+      padding:28px clamp(20px,5vw,48px);
+      transform:translateX(100%);
+      transition:transform .3s ease;
+      border-left:1px solid var(--line-dark);
+      overflow-y:auto;
+    }
+    nav.links.open{ transform:translateX(0); }
+    nav.links a{ font-size:16px; padding:12px 0; width:100%; border-bottom:1px solid var(--line-dark); }
+    .nav-cta{ margin-top:10px; }
+    .nav-toggle{
+      display:flex; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:8px;
+    }
+    .nav-toggle span{ width:22px; height:2px; background:var(--paper); }
+    .portfolio-grid { grid-template-columns: 1fr; }
+    .portfolio-grid-vertical { grid-template-columns: 1fr; }
+    .whatsapp-float-btn {
+      bottom: 16px;
+      left: 16px;
+      padding: 10px 12px;
+    }
+    .whatsapp-float-btn span { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <a href="index.html#top" class="brand">
+      <img class="brand-logo" src="beyondstars-logo.png" alt="BeyondStars Studios">
+    </a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="links" id="navLinks">
+      <a href="index.html#top">Home</a>
+      <a href="index.html#design">Design</a>
+      <a href="index.html#photography">Photography</a>
+      <a href="index.html#film">Film &amp; Weddings</a>
+      <a href="portfolio.html" class="active">Portfolio</a>
+      <a href="index.html#booking">Booking</a>
+      <a href="index.html#booking" class="nav-cta">Get a quote</a>
+    </nav>
+  </div>
+</header>
+
+<main class="portfolio-page">
+  <!-- INTRO -->
+  <section class="portfolio-intro">
+    <div class="wrap">
+      <span class="kicker">BeyondStars Studios</span>
+      <h1 class="display">Creative by BeyondStars</h1>
+      <p>Films, reels, commercials and visual stories made for brands, people and celebrations.</p>
+    </div>
+  </section>
+
+  <!-- VERTICAL VIDEOS (9:16) -->
+  <section class="portfolio-section" aria-labelledby="vertical-title">
+    <div class="wrap">
+      <div class="portfolio-section-heading">
+        <div>
+          <span class="kicker">Portrait format</span>
+          <h2 id="vertical-title" class="display">Vertical videos</h2>
+        </div>
+        <span class="portfolio-ratio">9:16</span>
+      </div>
+
+      <div class="portfolio-grid portfolio-grid-vertical">
+        <!-- 01: NEW VERTICAL VIDEO -->
+        <article class="portfolio-item">
+          <video controls playsinline preload="metadata" aria-label="BeyondStars Motion Ad">
+            <source src="assets/portfolio/beyondstars-motion-ad.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>BeyondStars Motion Ad</h3>
+            <span class="new-tag">New</span>
+          </div>
+        </article>
+
+        <!-- 02: Graduation Quotes -->
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/graduation-quotes-ready.jpg" aria-label="Get Your Quotes Ready">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/graduation-quotes-ready.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Get Your Quotes Ready</h3>
+          </div>
+        </article>
+
+        <!-- 03: Munchie Munchie -->
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/munchie-munchie-puppet.jpg" aria-label="Munchie Munchie — The Puppet">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/munchie-munchie-puppet.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Munchie Munchie — The Puppet</h3>
+          </div>
+        </article>
+
+        <!-- 04: Zani Eatery Tickets -->
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/get-your-tickets-zani-eatery.jpg" aria-label="Get Your Tickets — Zani Eatery">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/get-your-tickets-zani-eatery.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Get Your Tickets — Zani Eatery</h3>
+          </div>
+        </article>
+
+        <!-- 05: New Market Motor Co -->
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/get-your-tickets-zani-eatery-new-market.jpg" aria-label="New Market Motor Co.">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/get-your-tickets-zani-eatery-new-market.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>New Market Motor Co.</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- SQUARE STORIES (1:1) -->
+  <section class="portfolio-section portfolio-section-alt" aria-labelledby="square-title">
+    <div class="wrap">
+      <div class="portfolio-section-heading">
+        <div>
+          <span class="kicker">Square format</span>
+          <h2 id="square-title" class="display">Square stories</h2>
+        </div>
+        <span class="portfolio-ratio">1:1</span>
+      </div>
+
+      <div class="portfolio-grid portfolio-grid-square">
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/deerock-photography-reel.jpg" aria-label="Deerock Photography">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/deerock-photography-reel.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Deerock Photography</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/zani-eatery-timeless-memories.jpg" aria-label="Zani Eatery — Timeless Memories">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/zani-eatery-timeless-memories.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Zani Eatery — Timeless Memories</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/zani-eatery-unofficial-ad.jpg" aria-label="Zani Eatery — Unofficial Ad">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/zani-eatery-unofficial-ad.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Zani Eatery — Unofficial Ad</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/african-restaurant-promo.jpg" aria-label="African Restaurant Promo">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/african-restaurant-promo.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>African Restaurant Promo</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/invitation-little-dolphins-learning.jpg" aria-label="Invitation for Little Dolphins Learning">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/invitation-little-dolphins-learning.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Invitation for Little Dolphins Learning</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/lobola-celebration-2025.jpg" aria-label="Lobola Celebration 2025">
+            <source src="https://www.beyondstars.co.za/__l5e/assets-v1/c2f1b761-ca56-4ecf-a1f5-67c6c8c36751/lobola-celebration-2025.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Lobola Celebration 2025</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIDESCREEN FILMS (16:9) -->
+  <section class="portfolio-section" aria-labelledby="widescreen-title">
+    <div class="wrap">
+      <div class="portfolio-section-heading">
+        <div>
+          <span class="kicker">Widescreen format</span>
+          <h2 id="widescreen-title" class="display">16:9 films</h2>
+        </div>
+        <span class="portfolio-ratio">16:9</span>
+      </div>
+
+      <div class="portfolio-grid portfolio-grid-widescreen">
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/beyondstars-brand-film.jpg" aria-label="BeyondStars Brand Film">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/beyondstars-brand-film.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>BeyondStars Brand Film</h3>
+          </div>
+        </article>
+
+        <article class="portfolio-item">
+          <video controls playsinline preload="none" poster="https://www.beyondstars.co.za/assets/portfolio/zaolaemoboyz.jpg" aria-label="Zaolaemoboyz">
+            <source src="https://www.beyondstars.co.za/assets/portfolio/zaolaemoboyz.mp4" type="video/mp4">
+            Your browser does not support video playback.
+          </video>
+          <div class="portfolio-item-meta">
+            <h3>Zaolaemoboyz</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html#top" class="brand">
+      <img class="brand-logo" src="beyondstars-logo.png" alt="BeyondStars Studios">
+    </a>
+    <span><a href="tel:+27672338490" style="color:inherit">067 233 8490</a> · <a href="mailto:hilton@beyondstars.co.za" style="color:inherit">hilton@beyondstars.co.za</a></span>
+    <span>© 2026 BeyondStars Studios. Prices in ZAR, valid for the 2026 season.</span>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/27672338490" target="_blank" rel="noopener noreferrer" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.637-.363-.787-.327-1.428-.799-2.029-1.4-.602-.601-1.074-1.242-1.401-2.029-.416-1.003-.408-1.325-.363-1.637.049-.333.418-1.026.823-1.17.144-.051.309-.08.455-.08.118 0 .235.006.33.023.155.027.279.167.34.306.185.422.637 1.554.693 1.668.056.114.075.228.019.342-.056.114-.112.186-.224.298-.112.112-.224.224-.336.336-.112.112-.23.235-.098.461.132.226.586.967 1.259 1.567.868.774 1.6.1.014 1.826 1.146.226.132.359.113.471-.019.112-.132.484-.564.614-.757.13-.193.26-.161.436-.096.176.065 1.118.527 1.31.623.192.096.32.144.368.224.048.08.048.463-.096.868z"/></svg>
+  <span>WhatsApp us</span>
+</a>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+</script>
+
+</body>
+</html>
