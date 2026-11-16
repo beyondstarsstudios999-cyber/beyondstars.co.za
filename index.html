@@ -540,6 +540,578 @@
     .price-row{ grid-template-columns:32px 1fr auto; gap:12px; }
     .ribbon{ width:28px; }
   }
+
+  /* ---------- WEDDING SPECIAL TEASER & MODAL ---------- */
+  .wedding-special-teaser {
+    position: fixed;
+    z-index: 90;
+    bottom: 24px;
+    right: 24px;
+    width: 320px;
+    max-width: calc(100vw - 32px);
+    background: var(--ink);
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+    box-shadow: 0 16px 40px rgba(14,26,48,0.45), 0 0 20px rgba(227,169,60,0.25);
+    overflow: hidden;
+    animation: specialSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .wedding-special-teaser.hidden {
+    display: none !important;
+  }
+  @keyframes specialSlideUp {
+    from { opacity: 0; transform: translateY(30px) scale(0.96); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .teaser-banner {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    gap: 14px;
+    padding: 14px;
+    background: linear-gradient(135deg, rgba(21,44,82,0.9), rgba(14,26,48,0.95));
+  }
+  .teaser-thumb {
+    width: 78px;
+    height: 94px;
+    object-fit: cover;
+    border-radius: 3px;
+    border: 1px solid var(--gold);
+    flex-shrink: 0;
+  }
+  .teaser-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+  .teaser-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .teaser-tag .pulse-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4ade80;
+    box-shadow: 0 0 8px #4ade80;
+    animation: pulseGlow 1.8s infinite;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+  .teaser-title {
+    font-family: 'Anton', sans-serif;
+    font-size: 17px;
+    line-height: 1.15;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    margin: 2px 0;
+    text-transform: uppercase;
+  }
+  .teaser-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .teaser-price {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .teaser-was {
+    font-size: 11px;
+    color: var(--muted-light);
+    text-decoration: line-through;
+  }
+  .teaser-save {
+    font-size: 10px;
+    font-weight: 700;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 2px 5px;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+  .teaser-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: rgba(14,26,48,0.85);
+    border-top: 1px solid var(--line-dark);
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+  }
+  .teaser-cta-row:hover {
+    background: var(--navy);
+    color: var(--paper);
+  }
+  .teaser-close {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 26px;
+    height: 26px;
+    background: rgba(14,26,48,0.7);
+    border: 1px solid var(--line-dark);
+    border-radius: 50%;
+    color: var(--paper);
+    font-size: 15px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: background 0.2s, color 0.2s;
+  }
+  .teaser-close:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* Minimized Pill to reopen anytime */
+  .wedding-special-pill {
+    position: fixed;
+    z-index: 89;
+    bottom: 24px;
+    right: 24px;
+    display: none;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--ink);
+    border: 1px solid var(--gold);
+    border-radius: 30px;
+    color: var(--gold-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    box-shadow: 0 8px 24px rgba(14,26,48,0.35);
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  .wedding-special-pill:hover {
+    transform: translateY(-2px);
+    background: var(--navy);
+    color: var(--paper);
+  }
+  .wedding-special-pill.show {
+    display: inline-flex;
+    animation: specialSlideUp 0.3s ease both;
+  }
+
+  /* Modal Dialog */
+  .wedding-special-backdrop {
+    position: fixed;
+    z-index: 1000;
+    inset: 0;
+    display: none;
+    place-items: center;
+    padding: clamp(12px, 3vw, 24px);
+    background: rgba(10, 18, 33, 0.82);
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+  }
+  .wedding-special-backdrop.active {
+    display: grid;
+    animation: fadeIn 0.25s ease both;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .wedding-special-modal {
+    position: relative;
+    width: min(780px, 100%);
+    max-height: min(92vh, 920px);
+    display: flex;
+    flex-direction: column;
+    background: var(--paper);
+    color: var(--ink);
+    border: 1px solid var(--gold);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    overflow: hidden;
+    animation: modalPop 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.94) translateY(14px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  .modal-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--ink);
+    color: var(--gold-light);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--line-dark);
+  }
+  .modal-top-bar .close-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line-dark);
+    color: var(--paper);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+  }
+  .modal-top-bar .close-btn:hover {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .modal-body-scroll {
+    overflow-y: auto;
+    max-height: calc(92vh - 140px);
+  }
+  .modal-hero-banner {
+    position: relative;
+    background: linear-gradient(180deg, var(--ink), var(--navy) 65%, var(--navy-2));
+    color: var(--paper);
+    padding: clamp(24px, 4vw, 36px);
+    overflow: hidden;
+  }
+  .modal-hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .modal-hero-title {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4.5vw, 44px);
+    line-height: 1.05;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+    color: var(--paper);
+  }
+  .modal-price-strip {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px 20px;
+    background: rgba(14,26,48,0.65);
+    padding: 12px 18px;
+    border-left: 3px solid var(--gold);
+    margin-top: 14px;
+  }
+  .modal-price-strip .price-val {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(32px, 5.5vw, 48px);
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .modal-price-strip .price-was {
+    font-size: 15px;
+    color: var(--muted-light);
+    text-decoration: line-through;
+  }
+  .modal-price-strip .save-badge {
+    background: var(--gold);
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 800;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .urgency-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    background: rgba(227, 169, 60, 0.12);
+    border: 1px dashed var(--gold);
+    color: var(--gold-light);
+    padding: 6px 14px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* Two Column Modal Content */
+  .modal-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(20px, 3.5vw, 32px);
+    padding: clamp(20px, 4vw, 32px);
+  }
+  .modal-sec-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px;
+  }
+  .modal-sec-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--gold-deep);
+  }
+  .modal-sec-head h3 {
+    margin: 0;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .features-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+  .features-list li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 12px;
+    background: var(--paper-2);
+    border-left: 2px solid var(--gold);
+  }
+  .features-list .feat-icon {
+    font-size: 18px;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+  .features-list .feat-text strong {
+    display: block;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .features-list .feat-text span {
+    font-size: 12px;
+    color: var(--muted-dark);
+    line-height: 1.4;
+  }
+  .pay-steps {
+    display: grid;
+    gap: 10px;
+  }
+  .pay-step {
+    padding: 12px 14px;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pay-step span {
+    font-size: 12px;
+    color: var(--muted-dark);
+  }
+  .pay-step strong {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 17px;
+    color: var(--ink);
+  }
+  .rules-box {
+    margin-top: 14px;
+    padding: 12px;
+    background: rgba(14,26,48,0.06);
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--muted-dark);
+  }
+  .rules-box b {
+    color: var(--ink);
+  }
+  .modal-flyer-toggle {
+    margin-top: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: none;
+    color: var(--gold-deep);
+    font-weight: 700;
+    font-size: 12px;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 0;
+  }
+  .modal-flyer-toggle:hover {
+    color: var(--ink);
+  }
+  .flyer-lightbox-img {
+    display: none;
+    width: 100%;
+    margin-top: 12px;
+    border: 1px solid var(--gold);
+    border-radius: 4px;
+  }
+  .flyer-lightbox-img.open {
+    display: block;
+  }
+
+  /* Interactive WhatsApp Date Form in Modal */
+  .whatsapp-quick-form {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 18px;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+  .whatsapp-quick-form h4 {
+    margin: 0 0 10px;
+    font-family: 'Anton', sans-serif;
+    font-size: 15px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    letter-spacing: 0.05em;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted-light);
+    margin-bottom: 4px;
+    text-transform: uppercase;
+  }
+  .form-group input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid var(--line-dark);
+    color: var(--paper);
+    border-radius: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  .form-group input:focus {
+    outline: 2px solid var(--gold);
+    border-color: transparent;
+  }
+  .btn-whatsapp-reserve {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px 20px;
+    background: #25D366;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-whatsapp-reserve:hover {
+    background: #20BA59;
+    transform: translateY(-1px);
+  }
+  .btn-whatsapp-reserve svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* Floating WhatsApp direct icon */
+  .whatsapp-float-btn {
+    position: fixed;
+    z-index: 88;
+    bottom: 24px;
+    left: 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    background: #25D366;
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .whatsapp-float-btn:hover {
+    transform: translateY(-2px);
+    background: #20BA59;
+  }
+  .whatsapp-float-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+  }
+
+  @media (max-width: 760px) {
+    .modal-grid { grid-template-columns: 1fr; }
+    .form-row { grid-template-columns: 1fr; }
+    .wedding-special-teaser {
+      bottom: 16px;
+      right: 16px;
+      left: 16px;
+      width: auto;
+      max-width: none;
+    }
+    .wedding-special-pill {
+      bottom: 16px;
+      right: 16px;
+    }
+    .whatsapp-float-btn {
+      bottom: 16px;
+      left: 16px;
+      padding: 10px 12px;
+    }
+    .whatsapp-float-btn span {
+      display: none;
+    }
+  }
 </style>
 </head>
 <body>
@@ -817,7 +1389,299 @@
   window.addEventListener('load', () => {
     setTimeout(() => revealEls.forEach(el => el.classList.add('in')), 1200);
   });
+
+  // --- Enhanced Wedding Special Logic ---
+  const weddingTeaser = document.getElementById('weddingTeaser');
+  const closeTeaserBtn = document.getElementById('closeTeaserBtn');
+  const teaserOpenBtn = document.getElementById('teaserOpenBtn');
+  const teaserCtaRow = document.getElementById('teaserCtaRow');
+  const reopenPill = document.getElementById('reopenPill');
+  const weddingModal = document.getElementById('weddingModal');
+  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const toggleFlyerBtn = document.getElementById('toggleFlyerBtn');
+  const flyerImg = document.getElementById('flyerImg');
+
+  // Pleasant warm chime (C-major triad chord)
+  function playWarmChime() {
+    try {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (!AudioCtx) return;
+      const ctx = new AudioCtx();
+      const notes = [523.25, 659.25, 783.99]; // C5, E5, G5
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.04);
+        gain.gain.setValueAtTime(0.001, ctx.currentTime + i * 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.04, ctx.currentTime + i * 0.04 + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + i * 0.04 + 0.6);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(ctx.currentTime + i * 0.04);
+        osc.stop(ctx.currentTime + i * 0.04 + 0.65);
+      });
+    } catch (e) {
+      // Audio autoplay policy fallback
+    }
+  }
+
+  // Open & Close Modal
+  function openSpecialModal() {
+    weddingModal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSpecialModal() {
+    weddingModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // Show teaser after 1.8s
+  setTimeout(() => {
+    const isDismissed = sessionStorage.getItem('beyondstars_special_dismissed');
+    if (!isDismissed) {
+      weddingTeaser.classList.remove('hidden');
+      playWarmChime();
+    } else {
+      reopenPill.classList.add('show');
+    }
+  }, 1600);
+
+  // Teaser click events
+  teaserOpenBtn.addEventListener('click', openSpecialModal);
+  teaserCtaRow.addEventListener('click', openSpecialModal);
+  reopenPill.addEventListener('click', openSpecialModal);
+
+  // Dismiss Teaser
+  closeTeaserBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    weddingTeaser.classList.add('hidden');
+    reopenPill.classList.add('show');
+    sessionStorage.setItem('beyondstars_special_dismissed', 'true');
+  });
+
+  // Modal close handlers
+  modalCloseBtn.addEventListener('click', closeSpecialModal);
+  weddingModal.addEventListener('click', (e) => {
+    if (e.target === weddingModal) closeSpecialModal();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && weddingModal.classList.contains('active')) {
+      closeSpecialModal();
+    }
+  });
+
+  // Toggle high-res flyer image
+  toggleFlyerBtn.addEventListener('click', () => {
+    const isOpen = flyerImg.classList.toggle('open');
+    toggleFlyerBtn.textContent = isOpen ? '▲ Hide Promo Flyer' : '🔍 View Official Promo Flyer Image ↓';
+  });
+
+  // Dynamic WhatsApp prefill update
+  const leadName = document.getElementById('leadName');
+  const leadDate = document.getElementById('leadDate');
+  const leadVenue = document.getElementById('leadVenue');
+  const whatsappReserveBtn = document.getElementById('whatsappReserveBtn');
+
+  function updateWhatsAppLink() {
+    let msg = "Hi BeyondStars Studios, I would like to reserve the R6,500 Gauteng wedding special!";
+    const details = [];
+    if (leadName.value.trim()) details.push(`Name: ${leadName.value.trim()}`);
+    if (leadDate.value) details.push(`Date: ${leadDate.value}`);
+    if (leadVenue.value.trim()) details.push(`Venue/Area: ${leadVenue.value.trim()}`);
+    if (details.length > 0) {
+      msg += `\n\nOur Details:\n${details.join('\n')}`;
+    }
+    whatsappReserveBtn.href = `https://wa.me/27672338490?text=${encodeURIComponent(msg)}`;
+  }
+
+  [leadName, leadDate, leadVenue].forEach(inp => {
+    inp.addEventListener('input', updateWhatsAppLink);
+  });
 </script>
+
+<!-- WEDDING SPECIAL FLOATING TEASER -->
+<aside class="wedding-special-teaser hidden" id="weddingTeaser" aria-label="Limited wedding offer">
+  <button type="button" class="teaser-close" id="closeTeaserBtn" aria-label="Dismiss special offer">×</button>
+  <div class="teaser-banner" id="teaserOpenBtn" role="button" tabindex="0">
+    <img src="special-offer.png" alt="Wedding Special R6,500" class="teaser-thumb">
+    <div class="teaser-info">
+      <span class="teaser-tag"><span class="pulse-dot"></span> Limited Special</span>
+      <h4 class="teaser-title">Wedding Photo &amp; Film</h4>
+      <div class="teaser-pricing">
+        <span class="teaser-price">R6 500</span>
+        <span class="teaser-was">R10 000</span>
+        <span class="teaser-save">Save R3.5k</span>
+      </div>
+    </div>
+  </div>
+  <div class="teaser-cta-row" id="teaserCtaRow" role="button" tabindex="0">
+    <span>See Package &amp; Reserve Date</span>
+    <span>↗</span>
+  </div>
+</aside>
+
+<!-- RE-OPEN PILL (Shown when teaser dismissed) -->
+<button type="button" class="wedding-special-pill" id="reopenPill" aria-label="Open R6,500 Wedding Special">
+  <span>✨ Wedding Special (R6 500)</span>
+</button>
+
+<!-- FULL SCREEN MODAL DIALOG -->
+<div class="wedding-special-backdrop" id="weddingModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="wedding-special-modal" id="modalContainer">
+    <div class="modal-top-bar">
+      <span>BeyondStars Studios · Gauteng Wedding Offer</span>
+      <button type="button" class="close-btn" id="modalCloseBtn" aria-label="Close modal">×</button>
+    </div>
+
+    <div class="modal-body-scroll">
+      <div class="modal-hero-banner">
+        <span class="modal-hero-eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Photography &amp; Videography · Gauteng Only
+        </span>
+        <h2 class="modal-hero-title" id="modalTitle">Your Day, Beautifully Remembered.</h2>
+        <p style="margin:0; font-size:14px; color:var(--muted-light); max-width:55ch; line-height:1.5;">
+          Complete 6-hour wedding ceremony and reception coverage with cinema-grade cameras, drone aerials, and 150 professionally graded memories.
+        </p>
+
+        <div class="modal-price-strip">
+          <span class="price-val">R6 500</span>
+          <span class="price-was">Was R10 000</span>
+          <span class="save-badge">Save R3 500</span>
+        </div>
+
+        <div class="urgency-badge">
+          ⏳ Limited November &amp; December 2026 Dates Available · First-Come, First-Served
+        </div>
+      </div>
+
+      <div class="modal-grid">
+        <!-- Column 1: What is included -->
+        <div>
+          <div class="modal-sec-head">
+            <span class="modal-sec-num">01</span>
+            <h3>Package Inclusions</h3>
+          </div>
+          <ul class="features-list">
+            <li>
+              <span class="feat-icon">🎙️</span>
+              <div class="feat-text">
+                <strong>Couple Interviews</strong>
+                <span>1–2 minutes per person (Bride &amp; Groom candid dialogue)</span>
+              </div>
+            </li>
+            <li>
+              <span class="feat-icon">🎬</span>
+              <div class="feat-text">
+                <strong>Cinematic Wedding Film</strong>
+                <span>20-minute master edit set to music with professional audio</span>
+              </div>
+            </li>
+            <li>
+              <span class="feat-icon">🚁</span>
+              <div class="feat-text">
+                <strong>Drone Aerial Shots</strong>
+                <span>Subject to weather, venue permission &amp; safe flying conditions</span>
+              </div>
+            </li>
+            <li>
+              <span class="feat-icon">📸</span>
+              <div class="feat-text">
+                <strong>150 High-Resolution Photos</strong>
+                <span>Professionally colour-graded and delivered in full print quality</span>
+              </div>
+            </li>
+            <li>
+              <span class="feat-icon">🖼️</span>
+              <div class="feat-text">
+                <strong>Custom-Designed A1 Cover</strong>
+                <span>One commemorative A1 print-ready keepsake poster design</span>
+              </div>
+            </li>
+            <li>
+              <span class="feat-icon">📱</span>
+              <div class="feat-text">
+                <strong>1-Minute Social Reel</strong>
+                <span>Vertical highlight reel optimized for WhatsApp Status, Reels &amp; TikTok</span>
+              </div>
+            </li>
+          </ul>
+
+          <button type="button" class="modal-flyer-toggle" id="toggleFlyerBtn">
+            🔍 View Official Promo Flyer Image ↓
+          </button>
+          <img src="special-offer.png" alt="BeyondStars Wedding Special Flyer" class="flyer-lightbox-img" id="flyerImg">
+        </div>
+
+        <!-- Column 2: Payment & Instant WhatsApp Booking -->
+        <div>
+          <div class="modal-sec-head">
+            <span class="modal-sec-num">02</span>
+            <h3>Payment Schedule</h3>
+          </div>
+          <div class="pay-steps">
+            <div class="pay-step">
+              <div>
+                <strong>R1 500</strong>
+                <div><span>Booking Deposit · Secures your date</span></div>
+              </div>
+              <span>Step 1</span>
+            </div>
+            <div class="pay-step">
+              <div>
+                <strong>R3 000</strong>
+                <div><span>On the Event Day · Before shooting begins</span></div>
+              </div>
+              <span>Step 2</span>
+            </div>
+            <div class="pay-step">
+              <div>
+                <strong>R2 000</strong>
+                <div><span>Project Delivery · When files are ready</span></div>
+              </div>
+              <span>Step 3</span>
+            </div>
+          </div>
+
+          <div class="rules-box">
+            <b>Terms:</b> Maximum 6 hours coverage. Transport and hospitality excluded if outside standard central radius.
+          </div>
+
+          <!-- Instant WhatsApp Pre-fill Form -->
+          <div class="whatsapp-quick-form">
+            <h4>Reserve via WhatsApp</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="leadName">Your Name</label>
+                <input type="text" id="leadName" placeholder="e.g. Sindi &amp; Thabo">
+              </div>
+              <div class="form-group">
+                <label for="leadDate">Wedding Date</label>
+                <input type="date" id="leadDate">
+              </div>
+            </div>
+            <div class="form-group" style="margin-bottom:12px;">
+              <label for="leadVenue">Venue / Town (Gauteng)</label>
+              <input type="text" id="leadVenue" placeholder="e.g. Muldersdrift, Alberton...">
+            </div>
+            <a href="https://wa.me/27672338490?text=Hi%20BeyondStars%20Studios%2C%20I%20would%20like%20to%20reserve%20the%20R6%2C500%20Gauteng%20wedding%20special!" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-reserve" id="whatsappReserveBtn">
+              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.637-.363-.787-.327-1.428-.799-2.029-1.4-.602-.601-1.074-1.242-1.401-2.029-.416-1.003-.408-1.325-.363-1.637.049-.333.418-1.026.823-1.17.144-.051.309-.08.455-.08.118 0 .235.006.33.023.155.027.279.167.34.306.185.422.637 1.554.693 1.668.056.114.075.228.019.342-.056.114-.112.186-.224.298-.112.112-.224.224-.336.336-.112.112-.23.235-.098.461.132.226.586.967 1.259 1.567.868.774 1.6.1.014 1.826 1.146.226.132.359.113.471-.019.112-.132.484-.564.614-.757.13-.193.26-.161.436-.096.176.065 1.118.527 1.31.623.192.096.32.144.368.224.048.08.048.463-.096.868z"/></svg>
+              Reserve on WhatsApp ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/27672338490" target="_blank" rel="noopener noreferrer" class="whatsapp-float-btn" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766 0-3.18-2.587-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.053-1.637-.363-.787-.327-1.428-.799-2.029-1.4-.602-.601-1.074-1.242-1.401-2.029-.416-1.003-.408-1.325-.363-1.637.049-.333.418-1.026.823-1.17.144-.051.309-.08.455-.08.118 0 .235.006.33.023.155.027.279.167.34.306.185.422.637 1.554.693 1.668.056.114.075.228.019.342-.056.114-.112.186-.224.298-.112.112-.224.224-.336.336-.112.112-.23.235-.098.461.132.226.586.967 1.259 1.567.868.774 1.6.1.014 1.826 1.146.226.132.359.113.471-.019.112-.132.484-.564.614-.757.13-.193.26-.161.436-.096.176.065 1.118.527 1.31.623.192.096.32.144.368.224.048.08.048.463-.096.868z"/></svg>
+  <span>WhatsApp us</span>
+</a>
 
 </body>
 </html>
